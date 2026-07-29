@@ -3,7 +3,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
-import { LayoutDashboard, Users, Activity, LogOut, Package } from 'lucide-react';
+import { LayoutDashboard, Users, Activity, LogOut, Package, ShieldAlert, BookOpen } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
@@ -105,6 +105,8 @@ export default function RootLayout({
                 <NavLink href="/clients" icon={Users}>Clients</NavLink>
                 <NavLink href="/plans" icon={Package}>Plans</NavLink>
                 <NavLink href="/activity" icon={Activity}>Activity Logs</NavLink>
+                <NavLink href="/tracker" icon={ShieldAlert}>Piracy Logs</NavLink>
+                <NavLink href="/admin-guide" icon={BookOpen}>Admin Guide</NavLink>
               </nav>
               <div className="p-4 border-t border-[#333333]">
                 <button onClick={handleLogout} className="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-red-500/10 transition-colors text-red-500 font-medium">
