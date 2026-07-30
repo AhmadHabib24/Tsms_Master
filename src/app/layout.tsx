@@ -11,6 +11,7 @@ import api from "@/lib/api";
 const inter = Inter({ subsets: ["latin"] });
 
 import { Menu, X } from 'lucide-react';
+import PwaInstallPrompt from '@/components/PwaInstallPrompt';
 
 export default function RootLayout({
   children,
@@ -74,7 +75,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#121212" />
+        <link rel="apple-touch-icon" href="/tecveq_logo.png" />
+      </head>
       <body className={`${inter.className} bg-[#121212] text-white`}>
+        <PwaInstallPrompt />
         {isAuthPage ? (
           <main className="min-h-screen flex items-center justify-center bg-[#121212]">
             {children}
