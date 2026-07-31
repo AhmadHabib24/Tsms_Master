@@ -28,6 +28,9 @@ export default function PlansPage() {
     report_bills: true,
     report_discounts: false,
     report_udhar: false,
+    packages: false,
+    deals: false,
+    promo_codes: false,
   };
 
   const defaultFormData = { 
