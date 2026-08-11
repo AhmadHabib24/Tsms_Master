@@ -31,6 +31,7 @@ export default function PlansPage() {
     packages: false,
     deals: false,
     promo_codes: false,
+    groom_customers: false,
   };
 
   const defaultFormData = { 
