@@ -3,7 +3,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
-import { LayoutDashboard, Users, Activity, LogOut, Package, ShieldAlert, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Users, Activity, LogOut, Package, ShieldAlert, BookOpen, Blocks, Settings } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 import { Menu, X } from 'lucide-react';
 import PwaInstallPrompt from '@/components/PwaInstallPrompt';
+import { Toaster } from 'react-hot-toast';
 
 export default function RootLayout({
   children,
@@ -81,6 +82,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/tecveq_logo.png" />
       </head>
       <body className={`${inter.className} bg-[#121212] text-white`}>
+        <Toaster position="top-right" />
         <PwaInstallPrompt />
         {isAuthPage ? (
           <main className="min-h-screen flex items-center justify-center bg-[#121212]">
@@ -111,6 +113,9 @@ export default function RootLayout({
                 <NavLink href="/" icon={LayoutDashboard}>Dashboard</NavLink>
                 <NavLink href="/clients" icon={Users}>Clients</NavLink>
                 <NavLink href="/plans" icon={Package}>Plans</NavLink>
+                <NavLink href="/addon-plans" icon={Blocks}>Addon Packages</NavLink>
+                <NavLink href="/addon-approvals" icon={Activity}>Addon Approvals</NavLink>
+                <NavLink href="/settings" icon={Settings}>Settings</NavLink>
                 <NavLink href="/activity" icon={Activity}>Activity Logs</NavLink>
                 <NavLink href="/tracker" icon={ShieldAlert}>Piracy Logs</NavLink>
                 <NavLink href="/admin-guide" icon={BookOpen}>Admin Guide</NavLink>
