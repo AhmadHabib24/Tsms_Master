@@ -16,15 +16,40 @@ export default function AgreementPage() {
 
   if (!client) return <div className="p-10 text-white">Loading Agreement...</div>;
 
-  const handlePrint = () => {
-    window.print();
+  const handlePrint = async () => {
+    const elements = document.querySelectorAll('.pdf-page');
+    if (elements.length === 0) return;
+    
+    const actionBar = document.getElementById('action-bar');
+    if (actionBar) actionBar.style.display = 'none';
+
+    try {
+      const { jsPDF } = await import('jspdf');
+      const htmlToImage = await import('html-to-image');
+      
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      for (let i = 0; i < elements.length; i++) {
+        const el = elements[i] as HTMLElement;
+        const dataUrl = await htmlToImage.toJpeg(el, { quality: 0.98, backgroundColor: '#ffffff' });
+        
+        if (i > 0) pdf.addPage();
+        pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297);
+      }
+      const fileName = client?.name ? `${client.name.replace(/\s+/g, '_')}_Agreement.pdf` : 'Agreement.pdf';
+      pdf.save(fileName);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      if (actionBar) actionBar.style.display = 'flex';
+    }
   };
 
   return (
     <div className="bg-gray-200 min-h-screen text-black flex flex-col items-center py-8 print:py-0 print:bg-white gap-8">
       
       {/* Action Bar - Hidden during print */}
-      <div className="fixed top-4 right-4 print:hidden flex gap-3 z-50">
+      <div id="action-bar" className="fixed top-4 right-4 print:hidden flex gap-3 z-50">
         <button 
           onClick={handlePrint}
           className="bg-yellow-500 text-black px-6 py-2 rounded-lg font-bold shadow-lg hover:bg-yellow-600 flex items-center gap-2"
@@ -39,8 +64,9 @@ export default function AgreementPage() {
         </button>
       </div>
 
-      {/* PAGE 1 */}
-      <div className="bg-white w-[210mm] min-h-[297mm] shadow-2xl relative overflow-hidden print:shadow-none">
+      <div id="pdf-content" className="flex flex-col items-center gap-8 w-full">
+        {/* PAGE 1 */}
+        <div className="pdf-page bg-white w-[210mm] min-h-[297mm] shadow-2xl relative overflow-hidden print:shadow-none">
         
         {/* Modern Header Banner */}
         <div className="bg-[#1f2937] text-white p-12 relative">
@@ -115,10 +141,10 @@ export default function AgreementPage() {
       </div>
 
       {/* PAGE BREAK FOR PRINTING */}
-      <div className="hidden print:block" style={{ pageBreakBefore: 'always' }}></div>
+      <div className="html2pdf__page-break"></div>
 
       {/* PAGE 2 */}
-      <div className="bg-white w-[210mm] min-h-[297mm] shadow-2xl p-[20mm] relative print:shadow-none">
+      <div className="pdf-page bg-white w-[210mm] min-h-[297mm] shadow-2xl p-[20mm] relative print:shadow-none">
         
         {/* Purchase Details */}
         <div className="mb-8">
@@ -205,11 +231,12 @@ export default function AgreementPage() {
 
         {/* Footer */}
         <div className="absolute bottom-[10mm] left-[20mm] right-[20mm] text-center border-t pt-4 bg-white">
-          <p className="text-xs text-gray-500 font-bold mb-1">Tecveq Software Solutions</p>
-          <p className="text-xs text-gray-400">London, United Kingdom | WhatsApp: +44 7123 456789</p>
+          <p className="text-xs text-gray-500 font-bold mb-1">Tecveq</p>
+          <p className="text-xs text-gray-400">2 Idmiston Road, London, England, E15 1RG | WhatsApp: +44 7721 716507</p>
           <p className="text-xs text-yellow-600 font-bold mt-1">www.tecveq.com</p>
         </div>
 
+      </div>
       </div>
     </div>
   );
