@@ -130,6 +130,18 @@ export default function RootLayout({
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+              
+              {/* Mobile Header */}
+              <div className="md:hidden h-16 bg-[#1e1e1e] border-b border-[#333333] flex items-center justify-between px-4 z-30 shrink-0">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center font-bold text-black">T</div>
+                  <h1 className="text-lg font-bold text-yellow-500">Master</h1>
+                </div>
+                <button onClick={handleLogout} className="text-gray-400 hover:text-red-500 transition-colors p-1" title="Logout">
+                  <LogOut size={20} />
+                </button>
+              </div>
+
               <main className="flex-1 overflow-y-auto bg-[#121212] pb-20 md:pb-0">
                 {children}
               </main>

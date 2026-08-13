@@ -156,9 +156,9 @@ export default function ClientsPage() {
           <h1 className="text-2xl md:text-3xl font-bold text-white">Client Management</h1>
           <p className="text-gray-400 mt-1">Manage TSMS installations and license keys.</p>
         </div>
-        <div className="flex gap-3">
-          <button onClick={fetchData} className="flex items-center gap-2 bg-[#1e1e1e] border border-[#333333] px-4 py-2 rounded-lg hover:bg-[#2a2a2a] text-yellow-500 text-sm font-medium transition-colors">
-            <RefreshCcw size={16} /> <span className="hidden sm:inline">Refresh</span>
+        <div className="flex gap-3 w-full sm:w-auto">
+          <button onClick={fetchData} className="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-[#1e1e1e] border border-[#333333] px-4 py-2 rounded-lg hover:bg-[#2a2a2a] text-yellow-500 text-sm font-medium transition-colors">
+            <RefreshCcw size={16} /> <span>Refresh</span>
           </button>
           <button 
             onClick={() => {
@@ -166,7 +166,7 @@ export default function ClientsPage() {
               setNewClient({ name: '', email: '', domain: '', plan_id: '', duration: '1_month', sale_price: 0 });
               setShowAddModal(true);
             }}
-            className="flex items-center gap-2 bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-bold text-sm"
+            className="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-bold text-sm"
           >
             <Plus size={18} /> Add Client
           </button>
