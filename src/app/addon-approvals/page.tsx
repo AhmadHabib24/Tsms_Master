@@ -87,11 +87,11 @@ export default function AddonApprovalsPage() {
                     </div>
                   </td>
                   <td className="p-4">
-                    <p className="text-white capitalize">{addon.interval.replace('_', ' ')}</p>
-                    <p className="text-sm text-yellow-500 font-bold">Rs {Number(addon.price_paid).toLocaleString()}</p>
+                    <p className="text-white capitalize">{addon.interval ? addon.interval.replace('_', ' ') : '-'}</p>
+                    <p className="text-sm text-yellow-500 font-bold">Rs {Number(addon.price_paid || 0).toLocaleString()}</p>
                   </td>
                   <td className="p-4 text-gray-300 capitalize">
-                    {addon.payment_method.replace('_', ' ')}
+                    {addon.payment_method ? addon.payment_method.replace('_', ' ') : '-'}
                   </td>
                   <td className="p-4">
                     {addon.payment_proof_path ? (
@@ -111,7 +111,7 @@ export default function AddonApprovalsPage() {
                       addon.status === 'pending_approval' ? 'bg-yellow-500/20 text-yellow-500' :
                       'bg-red-500/20 text-red-500'
                     }`}>
-                      {addon.status.replace('_', ' ').toUpperCase()}
+                      {addon.status ? addon.status.replace('_', ' ').toUpperCase() : 'UNKNOWN'}
                     </span>
                   </td>
                   <td className="p-4 text-right">
