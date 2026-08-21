@@ -56,7 +56,7 @@ export default function RootLayout({
   if (!isMounted) {
     return (
       <html lang="en">
-        <body className={`${inter.className} bg-[#121212] text-white`}>
+        <body suppressHydrationWarning className={`${inter.className} bg-[#121212] text-white`}>
           <div className="min-h-screen flex items-center justify-center bg-[#121212]"></div>
         </body>
       </html>
@@ -67,7 +67,7 @@ export default function RootLayout({
   if (!token && !isAuthPage) {
     return (
       <html lang="en">
-        <body className={`${inter.className} bg-[#121212] text-white`}>
+        <body suppressHydrationWarning className={`${inter.className} bg-[#121212] text-white`}>
           <div className="min-h-screen flex items-center justify-center bg-[#121212]"></div>
         </body>
       </html>
@@ -81,7 +81,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#121212" />
         <link rel="apple-touch-icon" href="/tecveq_logo.png" />
       </head>
-      <body className={`${inter.className} bg-[#121212] text-white`}>
+      <body suppressHydrationWarning className={`${inter.className} bg-[#121212] text-white`}>
         <Toaster position="top-right" />
         <PwaInstallPrompt />
         {isAuthPage ? (
@@ -115,6 +115,7 @@ export default function RootLayout({
                 <NavLink href="/plans" icon={Package}>Plans</NavLink>
                 <NavLink href="/addon-plans" icon={Blocks}>Addon Packages</NavLink>
                 <NavLink href="/addon-approvals" icon={Activity}>Addon Approvals</NavLink>
+                <NavLink href="/password-change-requests" icon={ShieldAlert}>Password Requests</NavLink>
                 <NavLink href="/settings" icon={Settings}>Settings</NavLink>
                 <NavLink href="/activity" icon={Activity}>Activity Logs</NavLink>
                 <NavLink href="/tracker" icon={ShieldAlert}>Piracy Logs</NavLink>
